@@ -19,28 +19,6 @@
         </div>
     </div>
 
-    <div class="signout-container" *ngIf="isUserAuthenticated">
-        <button type="button"
-                mat-stroked-button
-                class="admin-panel-button"
-                (click)="requestToggleClassicView()"
-                title="Switch to classic layout">
-            <mat-icon>view_comfy</mat-icon>
-            Classic view
-        </button>
-        <img src="assets/icons/logo-banner.png" class="signout-banner-logo" alt="ThinLine Radio">
-        <button *ngIf="isSystemAdmin"
-                mat-stroked-button
-                class="admin-panel-button"
-                (click)="openAdminPanel()"
-                title="Open Admin Panel">
-            <mat-icon>admin_panel_settings</mat-icon>
-            Admin
-        </button>
-        <button mat-stroked-button class="signout-button" (click)="onSignOut()" title="Sign Out">
-            Sign Out
-        </button>
-    </div>
 
     <div class="dispatch-board"
          [class.disabled]="!subscriptionActive && subscriptionChecked">
@@ -129,15 +107,40 @@
             </button>
             <div class="toolbar-center-zone">
                 <div class="transport-volume" matTooltip="Output volume">
-                    <span class="transport-volume-title">Volume</span>
                     <mat-icon class="vol-ic-top" aria-hidden="true">volume_up</mat-icon>
                     <mat-slider class="volume-slider-compact"
                         [min]="0" [max]="100" [step]="1" [discrete]="true" [showTickMarks]="false">
                         <input matSliderThumb [(ngModel)]="volume" (ngModelChange)="onVolumeChange($event)">
                     </mat-slider>
-                    <span class="vol-val">{{ volume }}%</span>
                 </div>
             </div>
+            <ng-container *ngIf="isUserAuthenticated">
+                <span class="toolbar-divider"></span>
+                <button mat-stroked-button type="button" class="transport-action-btn"
+                        (click)="requestToggleClassicView()"
+                        matTooltip="Switch to classic layout">
+                    <span class="transport-action-stack">
+                        <mat-icon>view_comfy</mat-icon>
+                        <span class="transport-action-label">Classic</span>
+                    </span>
+                </button>
+                <button *ngIf="isSystemAdmin" mat-stroked-button type="button" class="transport-action-btn"
+                        (click)="openAdminPanel()"
+                        matTooltip="Open Admin Panel">
+                    <span class="transport-action-stack">
+                        <mat-icon>admin_panel_settings</mat-icon>
+                        <span class="transport-action-label">Admin</span>
+                    </span>
+                </button>
+                <button mat-stroked-button type="button" class="transport-action-btn"
+                        (click)="onSignOut()"
+                        matTooltip="Sign Out">
+                    <span class="transport-action-stack">
+                        <mat-icon>logout</mat-icon>
+                        <span class="transport-action-label">Sign Out</span>
+                    </span>
+                </button>
+            </ng-container>
         </mat-toolbar>
 
         <!-- Stays visible on every tab (live state not destroyed when leaving Board). -->
