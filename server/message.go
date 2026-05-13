@@ -36,6 +36,7 @@ const (
 	MessageCommandPinSet         = "PNS"
 	MessageCommandPushId         = "PID"
 	MessageCommandServer         = "SRV"
+	MessageCommandTranscript     = "TRN"
 	MessageCommandVersion        = "VER"
 
 	// WebsocketCallFlagDownload matches the client-side WebsocketCallFlag.Download value.

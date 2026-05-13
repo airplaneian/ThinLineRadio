@@ -30,19 +30,11 @@
             <button *ngIf="activeTab === 'alerts'" type="button" class="btn-refresh" (click)="loadAlerts()" [disabled]="loading">
                 {{ loading ? 'Loading...' : 'Refresh Alerts' }}
             </button>
-            <button *ngIf="activeTab === 'transcripts'" type="button" class="btn-refresh" (click)="loadTranscripts()" [disabled]="loadingTranscripts">
-                {{ loadingTranscripts ? 'Loading...' : 'Refresh Transcripts' }}
-            </button>
         </div>
     </div>
 
     <div class="alerts-header alerts-header-aux" *ngIf="!boardEmbed && panelMode === 'transcripts'">
         <span class="aux-heading"><mat-icon>forum</mat-icon> Transcripts</span>
-        <div class="header-actions">
-            <button type="button" class="btn-refresh" (click)="loadTranscripts()" [disabled]="loadingTranscripts">
-                {{ loadingTranscripts ? 'Loading...' : 'Refresh Transcripts' }}
-            </button>
-        </div>
     </div>
 
     <div class="alerts-header alerts-header-aux" *ngIf="!boardEmbed && panelMode === 'stats'">
@@ -203,90 +195,65 @@
     </div>
     
     <div class="transcripts-content" *ngIf="!boardEmbed && (panelMode === 'transcripts' || (panelMode === 'alertsAndPreferences' && activeTab === 'transcripts'))">
-        <!-- Filter Controls -->
-        <div class="transcript-filters">
-            <div class="filter-row">
-                <div class="filter-group">
-                    <label>System</label>
-                    <select [ngModel]="filterSystemId" (ngModelChange)="onSystemFilterChange($event)" class="filter-select">
-                        <option [ngValue]="undefined">All Systems</option>
-                        <option *ngFor="let system of availableSystems" [ngValue]="system.id">{{ system.label }}</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label>Talkgroup</label>
-                    <select [ngModel]="filterTalkgroupId" (ngModelChange)="onTalkgroupFilterChange($event)" class="filter-select" [disabled]="!filterSystemId">
-                        <option [ngValue]="undefined">All Talkgroups</option>
-                        <option *ngFor="let tg of getFilteredTalkgroups()" [ngValue]="tg.id">{{ tg.label }}</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label>Date From</label>
-                    <input type="date" [(ngModel)]="filterDateFrom" (change)="applyFilters()" class="filter-input">
-                </div>
-                
-                <div class="filter-group">
-                    <label>Date To</label>
-                    <input type="date" [(ngModel)]="filterDateTo" (change)="applyFilters()" class="filter-input">
-                </div>
-                
-                <div class="filter-group filter-search">
-                    <label>Search</label>
-                    <input type="text" [(ngModel)]="filterSearch" (input)="onSearchInput()" placeholder="Search transcripts..." class="filter-input search-input">
-                </div>
-                
-                <div class="filter-group filter-actions">
-                    <button (click)="clearFilters()" class="btn-clear-filters">Clear Filters</button>
-                </div>
-            </div>
+
+        <div class="transcript-filter-bar">
+            <select [ngModel]="filterSystemId" (ngModelChange)="onSystemFilterChange($event)" class="filter-select">
+                <option [ngValue]="undefined">All Systems</option>
+                <option *ngFor="let system of availableSystems" [ngValue]="system.id">{{ system.label }}</option>
+            </select>
+            <select [ngModel]="filterTalkgroupId" (ngModelChange)="onTalkgroupFilterChange($event)" class="filter-select" [disabled]="!filterSystemId">
+                <option [ngValue]="undefined">All Talkgroups</option>
+                <option *ngFor="let tg of getFilteredTalkgroups()" [ngValue]="tg.id">{{ tg.label }}</option>
+            </select>
+            <input type="date" [(ngModel)]="filterDateFrom" (change)="applyFilters()" class="filter-input" title="Date from">
+            <input type="date" [(ngModel)]="filterDateTo" (change)="applyFilters()" class="filter-input" title="Date to">
+            <input type="text" [(ngModel)]="filterSearch" (input)="onSearchInput()" placeholder="Search…" class="filter-input filter-search">
+            <button (click)="clearFilters()" class="btn-clear-filters">Clear</button>
         </div>
-        
+
         <div *ngIf="transcripts.length === 0 && !loadingTranscripts" class="no-alerts">
             <p>No transcripts found</p>
         </div>
         <div *ngIf="loadingTranscripts" class="loading">
-            <p>Loading transcripts...</p>
+            <p>Loading…</p>
         </div>
-        <div *ngIf="transcripts.length > 0" class="transcripts-list">
-            <div *ngFor="let transcript of transcripts; trackBy: trackByTranscriptId" class="transcript-item">
-                <div class="transcript-header">
-                    <div class="transcript-channel">
-                        <strong>Channel:</strong>
-                        <span>
+
+        <div *ngIf="transcripts.length > 0" class="transcripts-table-wrap">
+            <table class="transcripts-table">
+                <thead>
+                    <tr>
+                        <th class="col-time">Time</th>
+                        <th class="col-channel">Channel</th>
+                        <th class="col-transcript">Transcript</th>
+                        <th class="col-action"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transcript of transcripts; trackBy: trackByTranscriptId" class="transcript-row">
+                        <td class="col-time">{{ transcript.timestamp ? formatTimestamp(transcript.timestamp) : '' }}</td>
+                        <td class="col-channel">
                             <span *ngIf="transcript.systemLabel">{{ transcript.systemLabel }}</span>
                             <span *ngIf="!transcript.systemLabel">System {{ transcript.systemId }}</span>
-                            <span> / </span>
+                            <span class="chan-sep"> / </span>
                             <span *ngIf="transcript.talkgroupLabel">{{ transcript.talkgroupLabel }}</span>
                             <span *ngIf="!transcript.talkgroupLabel && transcript.talkgroupName">{{ transcript.talkgroupName }}</span>
-                            <span *ngIf="!transcript.talkgroupLabel && !transcript.talkgroupName">Talkgroup {{ transcript.talkgroupId }}</span>
-                        </span>
-                    </div>
-                </div>
-                <div class="transcript-body">
-                    <div *ngIf="transcript.alertSummary" class="alert-summary">
-                        <strong>Summary:</strong>
-                        <p class="summary-text">{{ transcript.alertSummary }}</p>
-                    </div>
-                    <p [innerHTML]="renderTranscript(transcript.transcript, transcript.transcriptAnnotations, filterSearch)"></p>
-                </div>
-                <div class="transcript-footer">
-                    <span>{{ transcript.timestamp ? formatTimestamp(transcript.timestamp) : '' }}</span>
-                    <button class="btn-play" (click)="playCall(transcript.callId)">
-                        Play Call
-                    </button>
-                </div>
-            </div>
+                            <span *ngIf="!transcript.talkgroupLabel && !transcript.talkgroupName">TG {{ transcript.talkgroupId }}</span>
+                        </td>
+                        <td class="col-transcript">
+                            <div *ngIf="transcript.alertSummary" class="row-summary">{{ transcript.alertSummary }}</div>
+                            <span [innerHTML]="renderTranscript(transcript.transcript, transcript.transcriptAnnotations, filterSearch)"></span>
+                        </td>
+                        <td class="col-action">
+                            <button class="btn-play-row" (click)="playCall(transcript.callId)">Play</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
             <div class="pagination-controls">
-                <button class="btn-nav" (click)="prevTranscriptsPage()" [disabled]="transcriptOffset === 0 || loadingTranscripts">
-                    ‹ Prev
-                </button>
-                <span>Showing {{ transcriptOffset + 1 }} - {{ transcriptOffset + transcripts.length }}</span>
-                <button class="btn-nav" (click)="nextTranscriptsPage()" [disabled]="transcripts.length < limit || loadingTranscripts">
-                    Next ›
-                </button>
+                <button class="btn-nav" (click)="prevTranscriptsPage()" [disabled]="transcriptOffset === 0 || loadingTranscripts">‹ Prev</button>
+                <span>{{ transcriptOffset + 1 }}–{{ transcriptOffset + transcripts.length }}</span>
+                <button class="btn-nav" (click)="nextTranscriptsPage()" [disabled]="transcripts.length < limit || loadingTranscripts">Next ›</button>
             </div>
         </div>
     </div>

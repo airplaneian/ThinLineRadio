@@ -187,6 +187,9 @@ export class RdioScannerAlertsComponent implements OnDestroy, OnInit {
                         this.playAlertSound();
                     }
                 }
+                if (event.transcript && !this.boardEmbed && (this.panelMode === 'transcripts' || (this.panelMode === 'alertsAndPreferences' && this.activeTab === 'transcripts'))) {
+                    this.loadTranscripts();
+                }
                 if (event.config && !this.boardEmbed && (this.panelMode === 'alertsAndPreferences' || this.panelMode === 'transcripts')) {
                     this.loadSystemsAndTalkgroups();
                 }

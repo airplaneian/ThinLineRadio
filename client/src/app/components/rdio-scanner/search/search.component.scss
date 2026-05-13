@@ -101,7 +101,7 @@
       }
 
       &:active {
-        background: rgba(0, 230, 118, 0.08);
+        background: rgba(91, 141, 217, 0.08);
       }
 
       &.reset-button {
@@ -531,7 +531,7 @@
         }
 
         .mdc-switch--selected .mdc-switch__track {
-          background-color: rgba(0, 230, 118, 0.55) !important;
+          background-color: rgba(91, 141, 217, 0.55) !important;
         }
 
         .mdc-switch__handle-track {
@@ -769,7 +769,6 @@ input[matInput][style*='opacity: 0'] {
   .filters-panel-title,
   .results-panel-title {
     color: var(--tlr-primary);
-    text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
   }
 
   .compact-button {
@@ -826,7 +825,6 @@ input[matInput][style*='opacity: 0'] {
       color: var(--tlr-accent);
       font-family: var(--tlr-font-numeric);
       border-bottom-color: var(--tlr-header-divider);
-      text-shadow: 0 0 6px rgba(126, 200, 232, 0.18);
 
       > span {
         color: inherit;
@@ -841,12 +839,10 @@ input[matInput][style*='opacity: 0'] {
     .mat-mdc-row.archive-row-playing,
     .mat-row.archive-row-playing {
       outline-color: var(--tlr-primary);
-      box-shadow: 0 0 14px rgba(57, 255, 20, 0.25) inset;
 
       .mat-mdc-cell,
       .mat-cell {
         color: var(--tlr-primary);
-        text-shadow: 0 0 8px rgba(57, 255, 20, 0.45);
       }
     }
   }

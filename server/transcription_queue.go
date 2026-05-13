@@ -473,6 +473,21 @@ func (queue *TranscriptionQueue) storeTranscription(callId uint64, result *Trans
 	if _, err := queue.controller.Database.Sql.Exec(insertQuery, callId, transcript, result.Confidence, result.Language, time.Now().UnixMilli()); err != nil {
 		queue.controller.Logs.LogEvent(LogLevelWarn, fmt.Sprintf("failed to insert transcription record: %v", err))
 	}
+
+	// Notify all connected clients that a new transcript is available so they
+	// can refresh their transcript list without polling.
+	msg := &Message{
+		Command: MessageCommandTranscript,
+		Payload: map[string]any{"callId": callId},
+	}
+	queue.controller.Clients.mutex.Lock()
+	for client := range queue.controller.Clients.Map {
+		select {
+		case client.Send <- msg:
+		default:
+		}
+	}
+	queue.controller.Clients.mutex.Unlock()
 }
 
 // processKeywords processes keywords after transcription completes

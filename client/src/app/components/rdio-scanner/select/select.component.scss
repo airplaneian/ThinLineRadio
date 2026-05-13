@@ -44,7 +44,7 @@
     transition: all 0.2s ease;
 
     &.focused {
-      border: 2px solid #00e676;
+      border: 2px solid var(--primary-color, #5b8dd9);
     }
 
     .search-icon {
@@ -119,7 +119,7 @@
       &.active {
         background: rgba(255, 255, 255, 0.08);
         color: #fff;
-        box-shadow: 0 1px 0 rgba(0, 230, 118, 0.35);
+        box-shadow: 0 1px 0 rgba(91, 141, 217, 0.35);
       }
 
       &:hover:not(.active) {
@@ -144,7 +144,7 @@
         font-size: 15px;
         font-weight: 700;
 
-        &.all   { color: #00e676; }
+        &.all   { color: var(--primary-color, #5b8dd9); }
         &.partial { color: #ff9100; }
         &.none  { color: #ff1744; }
       }
@@ -165,9 +165,9 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      border: 1px solid rgba(0, 230, 118, 0.3);
-      background: rgba(0, 230, 118, 0.1);
-      color: #00e676;
+      border: 1px solid rgba(91, 141, 217, 0.3);
+      background: rgba(91, 141, 217, 0.1);
+      color: var(--primary-color, #5b8dd9);
       cursor: pointer;
       transition: all 0.15s ease;
 
@@ -178,11 +178,11 @@
         color: inherit;
       }
 
-      &:hover { background: rgba(0, 230, 118, 0.2); }
+      &:hover { background: rgba(91, 141, 217, 0.2); }
 
       &.active {
-        border-color: rgba(0, 230, 118, 0.6);
-        background: rgba(0, 230, 118, 0.18);
+        border-color: rgba(91, 141, 217, 0.6);
+        background: rgba(91, 141, 217, 0.18);
       }
 
       &.partial {
@@ -240,7 +240,7 @@
   min-height: 0;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 
   .sidebar-head {
@@ -310,8 +310,8 @@
     }
 
     &.active {
-      background: rgba(0, 230, 118, 0.12);
-      border-color: rgba(0, 230, 118, 0.45);
+      background: rgba(91, 141, 217, 0.12);
+      border-color: rgba(91, 141, 217, 0.45);
     }
 
     .sidebar-row-icon {
@@ -321,14 +321,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 230, 118, 0.12);
+      background: rgba(91, 141, 217, 0.12);
       border-radius: 8px;
 
       mat-icon {
         font-size: 20px;
         width: 20px;
         height: 20px;
-        color: #00e676;
+        color: var(--primary-color, #5b8dd9);
       }
     }
 
@@ -381,7 +381,7 @@
   flex-direction: column;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 
   .channels-detail-header.system-card-header {
@@ -459,7 +459,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    background: rgba(0, 230, 118, 0.15);
+    background: rgba(91, 141, 217, 0.15);
     border-radius: 10px;
     flex-shrink: 0;
 
@@ -467,7 +467,7 @@
       width: 24px;
       height: 24px;
       font-size: 24px;
-      color: #00e676;
+      color: var(--primary-color, #5b8dd9);
     }
   }
 
@@ -505,7 +505,7 @@
       font-size: 18px;
 
       &.status-enabled {
-        color: #00e676;
+        color: var(--primary-color, #5b8dd9);
       }
 
       &.status-partial {
@@ -529,9 +529,9 @@
       cursor: pointer;
 
       &.all {
-        background: rgba(0, 230, 118, 0.2);
-        border: 1px solid #00e676;
-        color: #00e676;
+        background: rgba(91, 141, 217, 0.2);
+        border: 1px solid var(--primary-color, #5b8dd9);
+        color: var(--primary-color, #5b8dd9);
       }
 
       &.some {
@@ -564,9 +564,9 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
 
   &.all {
-    background: rgba(0, 230, 118, 0.18);
-    border-color: #00e676;
-    color: #00e676;
+    background: rgba(91, 141, 217, 0.18);
+    border-color: var(--primary-color, #5b8dd9);
+    color: var(--primary-color, #5b8dd9);
   }
 
   &.some {
@@ -585,9 +585,8 @@
   margin: 0 0 8px 0;
   background: var(--scaffold-background, #1e1e1e);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
   .system-header {
     display: flex;
@@ -606,7 +605,7 @@
       justify-content: center;
       width: 44px;
       height: 44px;
-      background: rgba(0, 230, 118, 0.15);
+      background: rgba(91, 141, 217, 0.15);
       border-radius: 10px;
       flex-shrink: 0;
 
@@ -614,7 +613,7 @@
         width: 24px;
         height: 24px;
         font-size: 24px;
-        color: #00e676;
+        color: var(--primary-color, #5b8dd9);
       }
     }
 
@@ -656,7 +655,7 @@
         font-size: 18px;
 
         &.status-enabled {
-          color: #00e676;
+          color: var(--primary-color, #5b8dd9);
         }
 
         &.status-partial {
@@ -681,9 +680,9 @@
         transition: all 0.2s ease;
 
         &.all {
-          background: rgba(0, 230, 118, 0.2);
-          border: 1px solid #00e676;
-          color: #00e676;
+          background: rgba(91, 141, 217, 0.2);
+          border: 1px solid var(--primary-color, #5b8dd9);
+          color: var(--primary-color, #5b8dd9);
         }
 
         &.some {
@@ -737,7 +736,7 @@
   margin-bottom: 8px;
   background: var(--scaffold-background, #1e1e1e);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   /* visible: absolute/fixed scan-list dropdown was clipped here (issue #150) */
   overflow: visible;
 
@@ -792,7 +791,7 @@
         font-size: 18px;
 
         &.status-enabled {
-          color: #00e676;
+          color: var(--primary-color, #5b8dd9);
         }
 
         &.status-partial {
@@ -817,8 +816,8 @@
         transition: all 0.2s ease;
 
         &.all {
-          background: rgba(0, 230, 118, 0.2);
-          color: #00e676;
+          background: rgba(91, 141, 217, 0.2);
+          color: var(--primary-color, #5b8dd9);
         }
 
         &.some {
@@ -872,7 +871,7 @@
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
 
@@ -881,10 +880,10 @@
   }
 
   &.enabled {
-    background: rgba(0, 230, 118, 0.15);
-    border-color: rgba(0, 230, 118, 0.5);
+    background: rgba(91, 141, 217, 0.15);
+    border-color: rgba(91, 141, 217, 0.5);
 
-    .row-radio-icon { color: #00e676; }
+    .row-radio-icon { color: var(--primary-color, #5b8dd9); }
     .row-label      { color: #fff; }
   }
 
@@ -1035,14 +1034,14 @@
   margin-bottom: 8px;
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 
-  &.expanded { border-color: rgba(0, 230, 118, 0.25); }
+  &.expanded { border-color: rgba(91, 141, 217, 0.25); }
 
   &.cdk-drag-animating { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
   &.cdk-drag-preview {
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
     opacity: 0.92;
   }
@@ -1051,9 +1050,9 @@
 .scan-list-drag-placeholder {
   height: 56px;
   margin-bottom: 8px;
-  border: 2px dashed rgba(0, 230, 118, 0.35);
-  border-radius: 12px;
-  background: rgba(0, 230, 118, 0.04);
+  border: 2px dashed rgba(91, 141, 217, 0.35);
+  border-radius: 4px;
+  background: rgba(91, 141, 217, 0.04);
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -1096,10 +1095,10 @@
     width: 34px;
     height: 34px;
     border-radius: 8px;
-    background: rgba(0, 230, 118, 0.12);
+    background: rgba(91, 141, 217, 0.12);
     flex-shrink: 0;
 
-    mat-icon { font-size: 18px; width: 18px; height: 18px; color: #00e676; }
+    mat-icon { font-size: 18px; width: 18px; height: 18px; color: var(--primary-color, #5b8dd9); }
 
     &.fav { background: rgba(255, 234, 0, 0.12); mat-icon { color: #ffea00; } }
   }
@@ -1125,7 +1124,7 @@
     }
 
     &.all-on {
-      color: #00e676;
+      color: var(--primary-color, #5b8dd9);
     }
   }
 
@@ -1142,8 +1141,7 @@
       }
 
       &.all-on {
-        color: #00e676;
-        text-shadow: 0 0 6px rgba(0, 230, 118, 0.55);
+        color: var(--primary-color, #5b8dd9);
       }
     }
   }
@@ -1245,15 +1243,15 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  border: 1px solid rgba(0, 230, 118, 0.3);
-  background: rgba(0, 230, 118, 0.1);
-  color: #00e676;
+  border: 1px solid rgba(91, 141, 217, 0.3);
+  background: rgba(91, 141, 217, 0.1);
+  color: var(--primary-color, #5b8dd9);
   cursor: pointer;
   transition: all 0.15s ease;
 
   mat-icon { width: 20px; height: 20px; font-size: 20px; color: inherit; }
 
-  &:hover { background: rgba(0, 230, 118, 0.2); }
+  &:hover { background: rgba(91, 141, 217, 0.2); }
 
   &.sm {
     width: 28px;
@@ -1318,17 +1316,16 @@
     }
 
     &.active {
-      background: rgba(57, 255, 20, 0.1);
+      background: rgba(91, 141, 217, 0.1);
       border-color: var(--tlr-primary);
 
       .sidebar-row-label {
         color: var(--tlr-primary);
-        text-shadow: 0 0 6px rgba(57, 255, 20, 0.45);
       }
     }
 
     .sidebar-row-icon {
-      background: rgba(57, 255, 20, 0.12);
+      background: rgba(91, 141, 217, 0.12);
 
       mat-icon {
         color: var(--tlr-primary);
@@ -1359,7 +1356,7 @@
 
   .system-card .system-header {
     .system-icon {
-      background: rgba(57, 255, 20, 0.12);
+      background: rgba(91, 141, 217, 0.12);
 
       mat-icon {
         color: var(--tlr-primary);
@@ -1385,7 +1382,7 @@
     }
 
     .system-toggle .toggle-badge.all {
-      background: rgba(57, 255, 20, 0.18);
+      background: rgba(91, 141, 217, 0.18);
       border-color: var(--tlr-primary);
       color: var(--tlr-primary);
     }
@@ -1410,7 +1407,7 @@
     }
 
     &.enabled {
-      background: rgba(57, 255, 20, 0.12);
+      background: rgba(91, 141, 217, 0.12);
       border-color: var(--tlr-primary);
 
       .row-radio-icon {
@@ -1419,7 +1416,6 @@
 
       .row-label {
         color: var(--tlr-primary);
-        text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
       }
     }
 
@@ -1441,7 +1437,6 @@
   /* Scan-lists panel — same LCD treatment as system cards. */
   .scan-lists-header .scan-lists-title {
     color: var(--tlr-primary);
-    text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
   }
 
   .scan-list-card {

@@ -1,8 +1,6 @@
 @use "@angular/material" as mat;
 
 @import "./styles/material-icons";
-@import "./styles/roboto-fonts";
-
 /* ── ThinLine skin (mobile-app parity) ─────────────────────────────────────
  * Tokens and fonts load globally so any component can read them. The skin
  * itself is opt-in: add `thinline-skin` (and optionally `thinline-skin--light`)
@@ -12,7 +10,7 @@
 
 @include mat.core();
 
-$rdio-scanner-font-family: Roboto, "Helvetica Neue", sans-serif;
+$rdio-scanner-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
 $rdio-scanner-primary: mat.define-palette(mat.$grey-palette, 800, 50);
 $rdio-scanner-accent: mat.define-palette(mat.$green-palette);

@@ -145,8 +145,8 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
     }
 
     get isTranscriptionEnabled(): boolean {
-        // Check if transcriptions are enabled in the config
-        return this.config?.options?.transcriptionEnabled || false;
+        // TODO: remove dev override — restore to config flag before shipping
+        return true || this.config?.options?.transcriptionEnabled || false;
     }
 
     renderTranscript(transcript: string, annotations?: TranscriptAnnotation[]): string {

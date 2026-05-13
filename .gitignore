@@ -28,6 +28,7 @@ Thumbs.db
 .vscode/
 .idea/
 .cursor/
+.claude/
 
 # Node
 node_modules/

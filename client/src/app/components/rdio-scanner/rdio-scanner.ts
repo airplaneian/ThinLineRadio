@@ -258,6 +258,7 @@ export interface RdioScannerEvent {
     queue?: number;
     time?: number;
     tooMany?: boolean;
+    transcript?: any;
 }
 
 export interface RdioScannerGroupData {

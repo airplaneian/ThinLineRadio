@@ -156,18 +156,18 @@
   flex-wrap: wrap;
   align-items: center;
   height: auto !important;
-  min-height: 48px;
-  padding: 10px 10px !important;
-  gap: 8px;
+  min-height: 0;
+  padding: 6px 10px !important;
+  gap: 6px;
   background: #252525 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.9) !important;
 
-  /* MDC stroked buttons default to a fixed height — allow content (icon + 2-line label) to breathe. */
+  /* MDC stroked buttons — compact single-row layout (icon + label inline). */
   .transport-action-btn.mat-mdc-outlined-button {
     --mdc-outlined-button-container-height: auto;
     height: auto !important;
-    min-height: 4.5rem;
+    min-height: 2.25rem;
     padding: 0 !important;
     overflow: visible;
     border-radius: 6px !important;
@@ -201,25 +201,25 @@
 
   .transport-action-btn {
     flex: 0 0 auto;
-    min-width: 4.75rem;
-    max-width: 5.5rem;
+    min-width: 0;
+    max-width: none;
     color: rgba(255, 255, 255, 0.88) !important;
 
     .transport-action-stack {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
-      padding: 0.65rem 0.45rem 0.75rem;
+      gap: 0.3rem;
+      padding: 0.3rem 0.6rem;
       width: 100%;
       box-sizing: border-box;
     }
 
     mat-icon {
-      font-size: 1.375rem;
-      width: 1.375rem;
-      height: 1.375rem;
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
       margin: 0;
       color: rgba(255, 255, 255, 0.78);
       flex-shrink: 0;
@@ -227,16 +227,14 @@
 
     .transport-action-label {
       display: block;
-      font-size: 0.5625rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      text-align: center;
+      text-align: left;
       color: rgba(255, 255, 255, 0.82);
-      padding: 0 2px 1px;
-      word-break: break-word;
-      hyphens: none;
+      white-space: nowrap;
     }
 
     &:hover {
@@ -245,15 +243,15 @@
     }
 
     &.active {
-      border-color: var(--primary-color, #00e676) !important;
-      background: rgba(0, 230, 118, 0.08) !important;
+      border-color: var(--primary-color, #5b8dd9) !important;
+      background: rgba(91, 141, 217, 0.08) !important;
 
       mat-icon {
-        color: var(--primary-color, #00e676);
+        color: var(--primary-color, #5b8dd9);
       }
 
       .transport-action-label {
-        color: var(--primary-color, #00e676);
+        color: var(--primary-color, #5b8dd9);
       }
     }
 
@@ -302,9 +300,9 @@
   .toolbar-divider {
     align-self: stretch;
     width: 1px;
-    min-height: 4.5rem;
+    min-height: 2rem;
     background: rgba(255, 255, 255, 0.15);
-    margin: 0 6px;
+    margin: 0 4px;
   }
 
   /* Fills flex space between transport buttons and volume slider. */
@@ -371,15 +369,15 @@
   .volume-slider-compact {
     flex: 1 1 auto;
     min-width: 0;
-    --mdc-slider-active-track-color: var(--primary-color, #00e676);
-    --mdc-slider-inactive-track-color: rgba(0, 230, 118, 0.22);
-    --mdc-slider-handle-color: var(--primary-color, #00e676);
-    --mdc-slider-hover-handle-color: #69f0ae;
-    --mdc-slider-focus-handle-color: #69f0ae;
-    --mdc-slider-label-label-text-color: #0d3320;
-    --mdc-slider-label-container-color: #69f0ae;
-    --mat-mdc-slider-ripple-color: rgba(0, 230, 118, 0.35);
-    --mat-slider-ripple-color: rgba(0, 230, 118, 0.35);
+    --mdc-slider-active-track-color: var(--primary-color, #5b8dd9);
+    --mdc-slider-inactive-track-color: rgba(91, 141, 217, 0.22);
+    --mdc-slider-handle-color: var(--primary-color, #5b8dd9);
+    --mdc-slider-hover-handle-color: #90b4e0;
+    --mdc-slider-focus-handle-color: #90b4e0;
+    --mdc-slider-label-label-text-color: #1a2a40;
+    --mdc-slider-label-container-color: #90b4e0;
+    --mat-mdc-slider-ripple-color: rgba(91, 141, 217, 0.35);
+    --mat-slider-ripple-color: rgba(91, 141, 217, 0.35);
 
     ::ng-deep .mat-mdc-slider {
       width: 100%;
@@ -392,8 +390,8 @@
     }
 
     ::ng-deep .mdc-slider__thumb-knob {
-      border-color: var(--primary-color, #00e676);
-      background-color: var(--primary-color, #00e676);
+      border-color: var(--primary-color, #5b8dd9);
+      background-color: var(--primary-color, #5b8dd9);
     }
   }
 
@@ -401,7 +399,7 @@
     font-size: 0.625rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    color: #69f0ae;
+    color: rgba(255, 255, 255, 0.7);
     white-space: nowrap;
     flex: 0 0 auto;
     min-width: 2rem;
@@ -492,7 +490,7 @@
     }
 
     .mat-mdc-tab.mdc-tab--active {
-      background: rgba(0, 230, 118, 0.08);
+      background: rgba(91, 141, 217, 0.08);
       border-radius: 8px 8px 0 0;
     }
 
@@ -520,10 +518,7 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--primary-color, #00e676);
-      box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.35),
-        0 0 12px rgba(0, 230, 118, 0.65);
+      background: var(--primary-color, #5b8dd9);
       animation: tab-live-pulse 2.2s ease-in-out infinite;
     }
 
@@ -623,11 +618,9 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  margin-bottom: 10px;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  padding: 6px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 12px;
 
   .status-strip-meta {
@@ -647,13 +640,13 @@
     letter-spacing: 0.05em;
 
     &.on {
-      background: rgba(0, 230, 118, 0.2);
-      color: #69f0ae;
+      background: rgba(76, 175, 80, 0.2);
+      color: #81c784;
     }
 
     &.off {
-      background: rgba(255, 82, 82, 0.2);
-      color: #ff8a80;
+      background: rgba(239, 83, 80, 0.2);
+      color: #e57373;
     }
   }
 
@@ -701,7 +694,7 @@
   margin-bottom: 0;
 
   .now-playing-table-wrap {
-    border-radius: 4px;
+    border-radius: 0;
   }
 }
 
@@ -758,9 +751,6 @@
 
 .history-table-wrap {
   overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
-  background: #141414;
 }
 
 .dispatch-table {
@@ -938,17 +928,16 @@
     margin-right: 4px;
   }
 
-  /* Stroked admin control: default Material theme was near-invisible on dark header */
   .admin-panel-button.mat-mdc-outlined-button {
     --mdc-outlined-button-label-text-color: #fff;
-    --mdc-outlined-button-outline-color: rgba(0, 230, 118, 0.7);
+    --mdc-outlined-button-outline-color: rgba(91, 141, 217, 0.7);
     --mat-outlined-button-icon-offset: -4px;
   }
 
   .admin-panel-button {
     color: #fff !important;
-    border-color: rgba(0, 230, 118, 0.7) !important;
-    background: rgba(0, 230, 118, 0.14) !important;
+    border-color: rgba(91, 141, 217, 0.7) !important;
+    background: rgba(91, 141, 217, 0.14) !important;
     border-radius: 20px;
     padding: 8px 20px;
     font-size: 14px;
@@ -957,18 +946,18 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 
     mat-icon {
-      color: #69f0ae !important;
+      color: #90b4e0 !important;
       margin-right: 4px;
     }
 
     &:hover {
-      background: rgba(0, 230, 118, 0.24) !important;
-      border-color: rgba(105, 240, 174, 0.95) !important;
-      --mdc-outlined-button-outline-color: rgba(105, 240, 174, 0.95);
+      background: rgba(91, 141, 217, 0.24) !important;
+      border-color: rgba(144, 180, 224, 0.95) !important;
+      --mdc-outlined-button-outline-color: rgba(144, 180, 224, 0.95);
     }
 
     &:active {
-      background: rgba(0, 230, 118, 0.18) !important;
+      background: rgba(91, 141, 217, 0.18) !important;
     }
   }
 
@@ -2177,35 +2166,28 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════
- * ThinLine skin overrides (parity with mobile app)
- *
- * Only applied when this component is rendered inside an ancestor with
- * `.thinline-skin` (currently set in `rdio-scanner.component.html` for the
- * new tab-based layout). Classic view inherits nothing here.
- *
- * See client/src/styles/_thinline-tokens.scss and docs/THINLINE_SKIN.md.
+ * ThinLine skin overrides
+ * Scoped to .thinline-skin ancestor (set in rdio-scanner.component.html).
+ * No glows, no scanlines, no custom fonts — system font throughout.
  * ═══════════════════════════════════════════════════════════════════════*/
 :host-context(.thinline-skin) {
   background: var(--tlr-chassis-gradient);
   color: var(--tlr-text);
-  font-family: var(--tlr-font-primary);
 
   .transport-toolbar {
     background: var(--tlr-lcd-gradient) !important;
     border-bottom-color: var(--tlr-bezel-border);
     color: var(--tlr-text) !important;
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.6),
-      0 2px 6px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
     .transport-action-btn {
       &.active {
         border-color: var(--tlr-primary) !important;
-        background: rgba(57, 255, 20, 0.08) !important;
+        background: rgba(91, 141, 217, 0.08) !important;
 
         mat-icon,
         .transport-action-label {
           color: var(--tlr-primary) !important;
-          text-shadow: 0 0 8px rgba(57, 255, 20, 0.55);
         }
       }
     }
@@ -2213,79 +2195,40 @@
 
   .board-live-strip {
     background: var(--tlr-lcd-gradient);
-    border: 1px solid var(--tlr-bezel-border);
-    border-radius: var(--tlr-bezel-radius);
-    box-shadow: var(--tlr-bezel-shadow);
-    /* CRT scanlines on the live LCD strip — matches mobile LCD body. */
-    position: relative;
-    overflow: hidden;
-
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        to bottom,
-        var(--tlr-lcd-scanline-color) 0,
-        var(--tlr-lcd-scanline-color) 1px,
-        transparent 1px,
-        transparent var(--tlr-lcd-scanline-step)
-      );
-      z-index: 0;
-    }
-
-    > * {
-      position: relative;
-      z-index: 1;
-    }
+    border-bottom: 1px solid var(--tlr-bezel-border);
   }
 
   .status-strip {
     color: var(--tlr-accent);
-    font-family: var(--tlr-font-numeric);
-    text-shadow: 0 0 10px rgba(126, 200, 232, 0.32);
 
     .led-pill {
       &.on {
-        background: rgba(57, 255, 20, 0.12);
+        background: rgba(76, 175, 80, 0.15);
         border-color: var(--tlr-led-green);
         color: var(--tlr-led-green);
-        box-shadow: 0 0 10px rgba(57, 255, 20, 0.45),
-          inset 0 0 6px rgba(57, 255, 20, 0.2);
       }
 
       &.off {
-        background: rgba(255, 51, 85, 0.12);
+        background: rgba(239, 83, 80, 0.15);
         border-color: var(--tlr-led-red);
         color: var(--tlr-led-red);
-        box-shadow: 0 0 10px rgba(255, 51, 85, 0.4),
-          inset 0 0 6px rgba(255, 51, 85, 0.2);
       }
     }
   }
 
   .scanning-banner {
     color: var(--tlr-primary);
-    text-shadow: 0 0 8px rgba(57, 255, 20, 0.55),
-      0 0 16px rgba(57, 255, 20, 0.25);
   }
 
   .now-playing-block {
     .now-playing-row td:nth-child(3) {
-      /* Talkgroup label gets the LCD hero glow on the now-playing line. */
       color: var(--tlr-accent);
-      font-family: var(--tlr-font-numeric);
-      text-shadow: 0 0 18px rgba(126, 200, 232, 0.9),
-        0 0 28px rgba(126, 200, 232, 0.45);
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
   }
 
-  /* Tab strip — match mobile LCD nav inactive readability rule. */
   .board-tabs ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
     color: var(--tlr-nav-inactive);
-    font-family: var(--tlr-font-primary);
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -2293,15 +2236,12 @@
 
   .board-tabs ::ng-deep .mat-mdc-tab--active .mdc-tab__text-label {
     color: var(--tlr-nav-active);
-    text-shadow: var(--tlr-nav-active-glow);
   }
 
   .board-tabs ::ng-deep .mdc-tab-indicator__content--underline {
     border-color: var(--tlr-primary) !important;
-    box-shadow: 0 0 8px rgba(57, 255, 20, 0.55);
   }
 
-  /* ── Tab panel chrome (chassis behind every tab) ────────────────────── */
   .tab-panel {
     background: var(--tlr-chassis-gradient);
     color: var(--tlr-text);
@@ -2310,69 +2250,36 @@
   .panel-title,
   .board-history-title {
     color: var(--tlr-text-secondary);
-    font-family: var(--tlr-font-primary);
-    letter-spacing: 0.08em;
   }
 
-  /* ── Current tab: call history table → LCD readout ──────────────────── */
   .history-table-wrap {
-    background: var(--tlr-lcd-gradient);
-    border: 1px solid var(--tlr-bezel-border);
-    border-radius: var(--tlr-bezel-radius);
-    box-shadow: var(--tlr-bezel-shadow);
-    position: relative;
-
-    /* CRT scanlines on the LCD body. */
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        to bottom,
-        var(--tlr-lcd-scanline-color) 0,
-        var(--tlr-lcd-scanline-color) 1px,
-        transparent 1px,
-        transparent var(--tlr-lcd-scanline-step)
-      );
-      z-index: 0;
-    }
-
-    > * {
-      position: relative;
-      z-index: 1;
-    }
+    background: transparent;
   }
 
   .dispatch-table {
     thead th {
       background: transparent;
       color: var(--tlr-text-secondary);
-      font-family: var(--tlr-font-primary);
       border-bottom-color: var(--tlr-header-divider);
     }
 
     tbody td {
       color: var(--tlr-accent);
-      font-family: var(--tlr-font-numeric);
       border-bottom-color: var(--tlr-header-divider);
-      text-shadow: 0 0 6px rgba(126, 200, 232, 0.18);
     }
 
     tbody tr {
       &:hover {
-        background: rgba(126, 200, 232, 0.06) !important;
+        background: rgba(144, 164, 174, 0.06) !important;
       }
 
       &.row-playing {
         outline-color: var(--tlr-primary);
-        box-shadow: 0 0 14px rgba(57, 255, 20, 0.25) inset;
       }
 
       &.row-playing td,
       &.row-selected td {
         color: var(--tlr-primary);
-        text-shadow: 0 0 8px rgba(57, 255, 20, 0.45);
       }
 
       &.row-selected:not(.row-playing) {
@@ -2381,19 +2288,14 @@
 
       &.empty-row td {
         color: var(--tlr-text-secondary);
-        font-family: var(--tlr-font-primary);
-        text-shadow: none;
       }
     }
   }
 
-  /* ── Now-playing strip already gets row hero glow above; keep its row
-   *    background untouched so tag colors still win. ──────────────────── */
   .now-playing-table-wrap {
     background: transparent;
   }
 
-  /* ── Transmission detail panel → bezel-wrapped LCD card ─────────────── */
   .call-detail-panel {
     background: var(--tlr-lcd-gradient);
     border: 1px solid var(--tlr-bezel-border);
@@ -2402,21 +2304,15 @@
 
     .detail-header {
       color: var(--tlr-primary);
-      font-family: var(--tlr-font-primary);
-      letter-spacing: 0.1em;
-      text-shadow: 0 0 8px rgba(57, 255, 20, 0.45);
     }
 
     .detail-grid {
       .detail-k {
         color: var(--tlr-text-secondary);
-        font-family: var(--tlr-font-primary);
       }
 
       .detail-v {
         color: var(--tlr-accent);
-        font-family: var(--tlr-font-numeric);
-        text-shadow: 0 0 6px rgba(126, 200, 232, 0.22);
       }
     }
 
@@ -2424,14 +2320,13 @@
       border-top-color: var(--tlr-header-divider);
 
       .transcript-body {
-        background: rgba(0, 0, 0, 0.35);
+        background: rgba(0, 0, 0, 0.25);
         border-left-color: var(--tlr-primary);
         color: var(--tlr-text);
       }
     }
   }
 
-  /* ── Right-side alerts rail in Current tab ──────────────────────────── */
   .board-alerts-rail {
     background: var(--tlr-lcd-gradient);
     border: 1px solid var(--tlr-bezel-border);
@@ -2439,22 +2334,18 @@
     box-shadow: var(--tlr-bezel-shadow);
   }
 
-  /* ── Archive tab: hint banner ───────────────────────────────────────── */
   .archive-panel .archive-hint {
     background: var(--tlr-lcd-gradient);
     border: 1px solid var(--tlr-bezel-border);
     border-radius: var(--tlr-bezel-radius);
     color: var(--tlr-accent);
-    text-shadow: 0 0 6px rgba(126, 200, 232, 0.22);
 
     strong {
       color: var(--tlr-primary);
-      text-shadow: 0 0 6px rgba(57, 255, 20, 0.45);
     }
   }
 
-  /* ── Auth overlay inside Current tab uses the chassis tint ─────────── */
   .board-panel .auth {
-    background: rgba(6, 7, 8, 0.78);
+    background: rgba(0, 0, 0, 0.75);
   }
 }

@@ -63,6 +63,7 @@ enum WebsocketCommand {
     Max = 'MAX',
     Pin = 'PIN',
     PinSet = 'PNS',
+    Transcript = 'TRN',
     Version = 'VER',
 }
 
@@ -1445,6 +1446,10 @@ export class RdioScannerService implements OnDestroy {
                     const connectionLimit = message[1] || 0;
                     this.emitEvent({ auth: true, tooMany: true, connectionLimit: connectionLimit });
 
+                    break;
+
+                case WebsocketCommand.Transcript:
+                    this.emitEvent({ transcript: message[1] });
                     break;
 
                 case WebsocketCommand.Pin:
