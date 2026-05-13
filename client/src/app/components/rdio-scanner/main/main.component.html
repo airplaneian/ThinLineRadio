@@ -32,7 +32,7 @@
                      alt=""
                      (error)="onToolbarLogoError($event)"
                      (load)="toolbarLogoError = false">
-                <span class="branding-inline">{{ branding || 'ThinLine Radio' }}</span>
+                <span class="branding-inline" *ngIf="toolbarLogoError || !toolbarLogoUrl">{{ branding || 'ThinLine Radio' }}</span>
             </div>
             <span class="toolbar-divider"></span>
             <button mat-stroked-button type="button" class="transport-action-btn"
@@ -95,14 +95,6 @@
                 <span class="transport-action-stack">
                     <mat-icon>{{ toolbarIcon('holdTalkgroup') }}</mat-icon>
                     <span class="transport-action-label">Hold TG</span>
-                </span>
-            </button>
-            <button mat-stroked-button type="button" class="transport-action-btn"
-                    matTooltip="Toggle fullscreen — scanner fills the screen"
-                    (click)="toggleFullscreen.emit()">
-                <span class="transport-action-stack">
-                    <mat-icon>fullscreen</mat-icon>
-                    <span class="transport-action-label">Fullscreen</span>
                 </span>
             </button>
             <div class="toolbar-center-zone">
