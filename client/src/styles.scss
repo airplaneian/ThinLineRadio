@@ -247,3 +247,22 @@ input.masked-pw {
     text-security: disc;
     font-family: monospace;
 }
+
+/* Page text is selectable so it can be copied. Only chrome — controls, tabs,
+   icons — opts out, so clicking and dragging on them doesn't grab label text. */
+button,
+label,
+mat-icon,
+.mat-icon,
+.mat-mdc-tab,
+.mat-mdc-tab-header,
+.mat-mdc-slider,
+.mat-mdc-checkbox,
+.mat-mdc-radio-button,
+.mat-mdc-slide-toggle,
+.mat-mdc-select,
+[role="tab"],
+[role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+}

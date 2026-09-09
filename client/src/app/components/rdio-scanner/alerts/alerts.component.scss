@@ -622,7 +622,7 @@
     .channel-alert-group {
         margin-bottom: 8px !important;
         
-        .mat-expansion-panel {
+        &.mat-expansion-panel {
             background-color: #2e2e2e !important;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
@@ -641,7 +641,7 @@
                 color: rgba(255, 255, 255, 0.9) !important;
             }
             
-            .mat-panel-title {
+            .mat-expansion-panel-header-title {
                 display: flex !important;
                 align-items: center !important;
                 gap: 0.75rem;
@@ -666,7 +666,7 @@
                 }
             }
             
-            .mat-panel-description {
+            .mat-expansion-panel-header-description {
                 display: inline-flex !important;
                 align-items: center !important;
                 column-gap: 16px !important;
@@ -716,13 +716,13 @@
     }
     
     .tone-alert-group {
-        .mat-expansion-panel {
+        &.mat-expansion-panel {
             border-left: 4px solid #ffc107;
         }
     }
     
     .channel-alert-group {
-        .mat-expansion-panel {
+        &.mat-expansion-panel {
             border-left: 4px solid var(--primary-color, #5b8dd9);
         }
     }
@@ -1670,8 +1670,8 @@
     }
 
     /* Material expansion panels (alert groupings). */
-    ::ng-deep .tone-alert-group .mat-expansion-panel,
-    ::ng-deep .channel-alert-group .mat-expansion-panel {
+    ::ng-deep .tone-alert-group.mat-expansion-panel,
+    ::ng-deep .channel-alert-group.mat-expansion-panel {
         background: var(--tlr-lcd-gradient) !important;
         border: 1px solid var(--tlr-bezel-border) !important;
         border-radius: var(--tlr-bezel-radius) !important;

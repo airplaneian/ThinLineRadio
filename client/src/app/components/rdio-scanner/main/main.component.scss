@@ -10,7 +10,6 @@
   margin: 0 auto;
   min-width: 0;
   padding: 8px;
-  user-select: none;
   background: var(--scaffold-background, #1e1e1e);
   color: rgba(255, 255, 255, 0.9);
 }
@@ -305,14 +304,53 @@
     margin: 0 4px;
   }
 
-  /* Fills flex space between transport buttons and volume slider. */
+  /* Below the width where everything fits on one row, break deliberately:
+     row 1 is brand + transport, row 2 is status + volume + account. Without
+     this the buttons wrap one at a time and orphan Sign Out on its own line. */
+  .toolbar-break {
+    display: none;
+  }
+
+  @media (max-width: 1400px) {
+    .toolbar-break {
+      display: block;
+      flex: 0 0 100%;
+      height: 0;
+      margin: 0;
+    }
+
+    .toolbar-divider-center {
+      display: none;
+    }
+
+    .toolbar-center-zone {
+      padding-left: 0;
+    }
+  }
+
+  /* Narrower still: icons carry the transport buttons on their own. */
+  @media (max-width: 900px) {
+    .transport-action-btn .transport-action-label {
+      display: none;
+    }
+
+    .transport-action-btn .transport-action-stack {
+      padding: 0.3rem 0.5rem;
+    }
+  }
+
+  /* Live status on the left, volume on the right, between transport and account. */
   .toolbar-center-zone {
-    flex: 1 1 auto;
-    min-width: 120px;
+    /* Zero basis: the zone contributes nothing to line-breaking, so it soaks up
+       leftover width instead of pushing Admin / Sign Out onto a second row.
+       The toolbar still wraps below its natural width. */
+    flex: 1 1 0;
+    min-width: 0;
     align-self: stretch;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 12px;
     padding: 4px 12px;
     box-sizing: border-box;
     overflow: hidden;
@@ -320,6 +358,64 @@
     .transport-volume {
       max-width: 160px;
       width: 100%;
+      flex: 0 1 160px;
+    }
+  }
+
+  .toolbar-status-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+
+    /* Two short rows rather than one long one — the toolbar has height to
+       spare (button row is taller) but very little width. */
+    .status-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.3;
+      min-width: 0;
+    }
+
+    .led-pill {
+      flex-shrink: 0;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+
+      &.on {
+        background: rgba(76, 175, 80, 0.2);
+        color: #81c784;
+      }
+
+      &.off {
+        background: rgba(239, 83, 80, 0.2);
+        color: #e57373;
+      }
+    }
+
+    .meta {
+      color: rgba(255, 255, 255, 0.65);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .live-indicator {
+      font-weight: 700;
+      color: #ffab40;
     }
   }
 
@@ -415,10 +511,6 @@
 
   .board-live-now-playing {
     margin-bottom: 0;
-  }
-
-  .status-strip {
-    margin-bottom: 10px;
   }
 
   .scanning-banner {
@@ -612,53 +704,6 @@
   }
 }
 
-
-.status-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  margin-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 12px;
-
-  .status-strip-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 16px;
-    flex: 0 1 auto;
-    min-width: 0;
-  }
-
-  .led-pill {
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-weight: 700;
-    font-size: 10px;
-    letter-spacing: 0.05em;
-
-    &.on {
-      background: rgba(76, 175, 80, 0.2);
-      color: #81c784;
-    }
-
-    &.off {
-      background: rgba(239, 83, 80, 0.2);
-      color: #e57373;
-    }
-  }
-
-  .meta {
-    color: rgba(255, 255, 255, 0.65);
-  }
-
-  .live-indicator {
-    font-weight: 700;
-    color: #ffab40;
-  }
-}
 
 .scanning-banner {
   display: flex;
@@ -2126,7 +2171,7 @@
     border-bottom: 1px solid var(--tlr-bezel-border);
   }
 
-  .status-strip {
+  .toolbar-status-meta {
     color: var(--tlr-accent);
 
     .led-pill {

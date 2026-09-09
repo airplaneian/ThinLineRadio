@@ -19,7 +19,21 @@
 
 'use strict';
 
-const server = 'http://localhost:3000';
+// Default target: a server running alongside the dev server. To point at another
+// machine, drop a proxy.conf.local.js next to this file — it is gitignored:
+//
+//     module.exports = { server: 'http://192.168.1.226:3000' };
+//
+// Use an IPv4 literal there, not a .local name: Node resolves mDNS hostnames to
+// unroutable IPv6 addresses first and proxying dies with EHOSTUNREACH. curl
+// hides this by falling back to IPv4; Node doesn't.
+let server = 'http://localhost:3000';
+
+try {
+    server = require('./proxy.conf.local.js').server || server;
+} catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') throw e;
+}
 
 module.exports = [
     {

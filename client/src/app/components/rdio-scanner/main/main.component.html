@@ -97,7 +97,23 @@
                     <span class="transport-action-label">Hold TG</span>
                 </span>
             </button>
+            <span class="toolbar-break" aria-hidden="true"></span>
+            <span class="toolbar-divider toolbar-divider-center"></span>
             <div class="toolbar-center-zone">
+                <div class="toolbar-status-meta">
+                    <span class="led-pill" [class.on]="linked" [class.off]="!linked">{{ linked ? 'LINK' : 'NO LINK' }}</span>
+                    <div class="status-lines">
+                        <span class="status-line">
+                            <span class="meta">Time {{ clock | date:timeFormat }}</span>
+                            <span class="meta live-indicator" *ngIf="call" [matTooltip]="getDelayedTooltip()">{{ getDelayedText() }}</span>
+                        </span>
+                        <span class="status-line">
+                            <span class="meta" *ngIf="showListenersCount">Users {{ listeners }}</span>
+                            <span class="meta" *ngIf="!showListenersCount">Users —</span>
+                            <span class="meta">Queue {{ callQueue }}</span>
+                        </span>
+                    </div>
+                </div>
                 <div class="transport-volume" matTooltip="Output volume">
                     <mat-icon class="vol-ic-top" aria-hidden="true">volume_up</mat-icon>
                     <mat-slider class="volume-slider-compact"
@@ -108,14 +124,6 @@
             </div>
             <ng-container *ngIf="isUserAuthenticated">
                 <span class="toolbar-divider"></span>
-                <button mat-stroked-button type="button" class="transport-action-btn"
-                        (click)="requestToggleClassicView()"
-                        matTooltip="Switch to classic layout">
-                    <span class="transport-action-stack">
-                        <mat-icon>view_comfy</mat-icon>
-                        <span class="transport-action-label">Classic</span>
-                    </span>
-                </button>
                 <button *ngIf="isSystemAdmin" mat-stroked-button type="button" class="transport-action-btn"
                         (click)="openAdminPanel()"
                         matTooltip="Open Admin Panel">
@@ -137,17 +145,6 @@
 
         <!-- Stays visible on every tab (live state not destroyed when leaving Board). -->
         <div class="board-live-strip">
-            <div class="status-strip">
-                <div class="status-strip-meta">
-                    <span class="led-pill" [class.on]="linked" [class.off]="!linked">{{ linked ? 'LINK' : 'NO LINK' }}</span>
-                    <span class="meta">Time {{ clock | date:timeFormat }}</span>
-                    <span class="meta" *ngIf="showListenersCount">Listeners {{ listeners }}</span>
-                    <span class="meta" *ngIf="!showListenersCount">Listeners —</span>
-                    <span class="meta">Queue {{ callQueue }}</span>
-                    <span class="meta live-indicator" *ngIf="call" [matTooltip]="getDelayedTooltip()">{{ getDelayedText() }}</span>
-                </div>
-            </div>
-
             <div class="scanning-banner" *ngIf="showScanningAnimation">
                 <span class="scan-label">SCANNING</span>
                 <span class="scan-sys" *ngIf="getCurrentScanningSystem()">{{ getCurrentScanningSystem() }}</span>

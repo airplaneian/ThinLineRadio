@@ -65,7 +65,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
     private expandedScanListSystems = new Set<string>();
     private expandedScanListTags = new Set<string>();
     private scanListsSubscription?: Subscription;
-    detailSystemId: number | null = null;
     expandedTags: Map<string, boolean> = new Map();
     hiddenSystems: Set<number> = new Set();
     private eventSubscription?: Subscription;
@@ -86,7 +85,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
 
         this.favoritesSubscription = this.favoritesService.getFavorites().subscribe(() => {
             this.favoriteItems = this.favoritesService.getFavoriteItems();
-            this.syncDetailSystemSelection();
             this.cdRef.markForCheck();
         });
         this.favoriteItems = this.favoritesService.getFavoriteItems();
@@ -117,7 +115,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
         }
         this.categories = this.rdioScannerService.getCategories();
         this.map = this.rdioScannerService.getLivefeedMap();
-        this.syncDetailSystemSelection();
         this.cdRef.markForCheck();
     }
 
@@ -158,19 +155,16 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
 
     clearSearch(): void {
         this.searchQuery = '';
-        this.syncDetailSystemSelection();
         this.cdRef.markForCheck();
     }
 
     onSearchChange(): void {
-        this.syncDetailSystemSelection();
         this.cdRef.markForCheck();
     }
 
     setNavMode(mode: 'all' | 'favorites' | 'scanLists'): void {
         if (this.navMode === mode) return;
         this.navMode = mode;
-        this.syncDetailSystemSelection();
         this.cdRef.markForCheck();
     }
 
@@ -357,12 +351,7 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
         this.cdRef.markForCheck();
     }
 
-    selectDetailSystem(systemId: number): void {
-        this.detailSystemId = systemId;
-        this.cdRef.markForCheck();
-    }
-
-    getSystemsForSidebar(): RdioScannerSystem[] {
+    getListedSystems(): RdioScannerSystem[] {
         let list: RdioScannerSystem[];
         if (this.navMode === 'favorites') {
             list = this.getFavoriteSystemsWithFavorites().filter(s => !this.hiddenSystems.has(s.id));
@@ -380,22 +369,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
                 return label.includes(q) || name.includes(q) || id.includes(q);
             });
         });
-    }
-
-    getDetailSystem(): RdioScannerSystem | undefined {
-        if (this.detailSystemId == null || !this.systems) return undefined;
-        return this.systems.find(s => s.id === this.detailSystemId);
-    }
-
-    private syncDetailSystemSelection(): void {
-        const list = this.getSystemsForSidebar();
-        if (list.length === 0) {
-            this.detailSystemId = null;
-            return;
-        }
-        if (this.detailSystemId == null || !list.some(s => s.id === this.detailSystemId)) {
-            this.detailSystemId = list[0].id;
-        }
     }
 
     getVisibleSystems(): RdioScannerSystem[] {
@@ -446,13 +419,13 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
 
     isTagExpanded(systemId: number, tag: string): boolean {
         const key = `${systemId}-${tag}`;
-        return this.expandedTags.get(key) || false;
+        return this.expandedTags.get(key) ?? true;
     }
 
     toggleTag(systemId: number, tag: string, event?: Event): void {
         const key = `${systemId}-${tag}`;
 
-        const current = this.expandedTags.get(key) || false;
+        const current = this.expandedTags.get(key) ?? true;
         this.expandedTags.set(key, !current);
     }
 
@@ -663,30 +636,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
         if (!tagGroup) return false;
         const enabled = tagGroup.talkgroups.filter(tg => this.isTalkgroupEnabled(systemId, tg.id)).length;
         return enabled > 0 && enabled < tagGroup.talkgroups.length;
-    }
-
-    getSystemStatusIcon(system: RdioScannerSystem): string {
-        if (this.isAllEnabledInSystem(system)) return 'check_circle';
-        if (this.isSomeEnabledInSystem(system)) return 'remove_circle';
-        return 'circle_outlined';
-    }
-
-    getSystemStatusClass(system: RdioScannerSystem): string {
-        if (this.isAllEnabledInSystem(system)) return 'status-enabled';
-        if (this.isSomeEnabledInSystem(system)) return 'status-partial';
-        return 'status-disabled';
-    }
-
-    getTagStatusIcon(systemId: number, tag: string): string {
-        if (this.isAllEnabledInTag(systemId, tag)) return 'check_circle';
-        if (this.isSomeEnabledInTag(systemId, tag)) return 'remove_circle';
-        return 'circle_outlined';
-    }
-
-    getTagStatusClass(systemId: number, tag: string): string {
-        if (this.isAllEnabledInTag(systemId, tag)) return 'status-enabled';
-        if (this.isSomeEnabledInTag(systemId, tag)) return 'status-partial';
-        return 'status-disabled';
     }
 
     getTagIcon(tag: string): string {
@@ -1073,7 +1022,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
                 });
 
                 this.saveHiddenSystems();
-                this.syncDetailSystemSelection();
                 this.cdRef.markForCheck();
             }
         });
@@ -1164,7 +1112,6 @@ export class RdioScannerSelectComponent implements OnDestroy, OnInit {
     private eventHandler(event: RdioScannerEvent): void {
         if (event.config) {
             this.systems = event.config.systems;
-            this.syncDetailSystemSelection();
         }
         if (event.categories) this.categories = event.categories;
         if (event.map) this.map = event.map;

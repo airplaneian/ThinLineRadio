@@ -30,6 +30,9 @@ Thumbs.db
 .cursor/
 .claude/
 
+# Local dev proxy target (each environment points somewhere different)
+client/src/proxy.conf.local.js
+
 # Node
 node_modules/
 create-ico-temp.js

@@ -4,7 +4,6 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  user-select: none;
   background: #141414;
   color: rgba(255, 255, 255, 0.9);
   width: 100%;
@@ -889,4 +888,11 @@
     border-color: rgba(255, 255, 255, 0.4);
     color: #fff;
   }
+}
+
+/* Click targets that aren't <button> — don't select their labels on click. */
+.tag-header,
+.chip-header {
+  -webkit-user-select: none;
+  user-select: none;
 }

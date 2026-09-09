@@ -190,10 +190,6 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
             });
     }
 
-    requestToggleClassicView(): void {
-        this.toggleClassicViewRequest.emit();
-    }
-
     getEnabledSystems(): Array<{ id: number; label: string }> {
         if (!this.config?.systems || !this.map) {
             return [];
@@ -306,7 +302,6 @@ export class RdioScannerMainComponent implements OnDestroy, OnInit {
 
     @Output() signOut = new EventEmitter<void>();
 
-    @Output() toggleClassicViewRequest = new EventEmitter<void>();
 
     @ViewChild('password', { read: MatInput }) private authPassword: MatInput | undefined;
 

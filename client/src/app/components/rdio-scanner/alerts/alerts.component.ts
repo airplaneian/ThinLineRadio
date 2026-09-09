@@ -71,12 +71,6 @@ export class RdioScannerAlertsComponent implements OnDestroy, OnInit {
      */
     @Input() panelMode: RdioScannerAlertsPanelMode = 'alertsAndPreferences';
 
-    /**
-     * Classic/legacy sidenav: add a third inner tab “Transcripts” (full transcript list) next to Alerts / Preferences.
-     * Main board keeps a separate top-level Transcripts tab — leave this false there to avoid duplication.
-     */
-    @Input() includeTranscriptsTab = false;
-
     alerts: RdioScannerAlert[] = [];
     transcripts: RdioScannerTranscript[] = [];
     loading = false;
@@ -315,20 +309,12 @@ export class RdioScannerAlertsComponent implements OnDestroy, OnInit {
         this.searchSubject.complete();
     }
 
-    /** When true, classic sidenav shows Alerts | Preferences | Transcripts inner tabs. */
-    get showTranscriptsInnerTab(): boolean {
-        return this.includeTranscriptsTab && this.isTranscriptionEnabled;
-    }
-
     get isTranscriptionEnabled(): boolean {
         return !!this.rdioScannerService.getConfig()?.options?.transcriptionEnabled;
     }
 
     setTab(tab: 'alerts' | 'preferences' | 'transcripts'): void {
         if (this.panelMode !== 'alertsAndPreferences') {
-            return;
-        }
-        if (tab === 'transcripts' && !this.showTranscriptsInnerTab) {
             return;
         }
         this.activeTab = tab;
